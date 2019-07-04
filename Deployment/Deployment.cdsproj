@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" />
+
+  <PropertyGroup>
+    <Name>Deployment</Name>
+    <ProjectGuid>a49e2838-2715-4a07-aa52-0129424bbb4d</ProjectGuid>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+
+  <!-- Solution Packager overrides, un-comment to use: SolutionPackagerType (Managed, Unmanaged, Both)
+  <PropertyGroup>
+    <SolutionPackageType>Managed</SolutionPackageType>
+  </PropertyGroup>
+  -->
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.PowerApps.MSBuild.Solution" Version="0.*" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ExcludeDirectories Include="$(MSBuildThisFileDirectory)\bin\**" />
+    <ExcludeDirectories Include="$(MSBuildThisFileDirectory)\obj\**" />
+    <ExcludeDirectories Include="$(MSBuildThisFileDirectory)\*.cdsproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)\**" Exclude="@(ExcludeDirectories)">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\projects\pcf\ibanvalidator\IbanValidator.pcfproj">
+      <Project>2a85c5d6-56ea-4173-9dd8-470dfb6f8d8b</Project>
+      <Name>IbanValidator</Name>
+      <Targets>Build</Targets>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Content</OutputItemType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>

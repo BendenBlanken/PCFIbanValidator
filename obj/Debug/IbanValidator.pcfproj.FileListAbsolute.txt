@@ -1,0 +1,2 @@
+c:\Projects\PCF\IbanValidator\obj\Debug\IbanValidator.pcfprojAssemblyReference.cache
+c:\Projects\PCF\IbanValidator\obj\Debug\IbanValidator.pcfproj.CoreCompileInputs.cache
