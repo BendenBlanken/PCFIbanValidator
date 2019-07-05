@@ -66,11 +66,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\projects\\pcf\\ibanvalidator\\IbanValidator.pcfproj",
+      "projectUniqueName": "c:\\Projects\\PCF\\PCFIbanValidator\\IbanValidator.pcfproj",
       "projectName": "IbanValidator",
-      "projectPath": "c:\\projects\\pcf\\ibanvalidator\\IbanValidator.pcfproj",
+      "projectPath": "c:\\Projects\\PCF\\PCFIbanValidator\\IbanValidator.pcfproj",
       "packagesPath": "C:\\Users\\bdblanken\\.nuget\\packages\\",
-      "outputPath": "c:\\projects\\pcf\\ibanvalidator\\obj\\",
+      "outputPath": "c:\\Projects\\PCF\\PCFIbanValidator\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [

@@ -32,7 +32,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\projects\pcf\ibanvalidator\IbanValidator.pcfproj">
+    <ProjectReference Include="..\IbanValidator.pcfproj">
       <Project>2a85c5d6-56ea-4173-9dd8-470dfb6f8d8b</Project>
       <Name>IbanValidator</Name>
       <Targets>Build</Targets>

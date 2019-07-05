@@ -5,7 +5,7 @@ export class IbanValidator implements ComponentFramework.StandardControl<IInputs
 
     // parameter declarations
     private _ibanElement: HTMLInputElement;
-    private _ibanImageElement: HTMLElement;
+    private _ibanImageElement: HTMLImageElement;
 
     private _iban: string;
 
@@ -47,11 +47,12 @@ export class IbanValidator implements ComponentFramework.StandardControl<IInputs
         this._ibanElement.setAttribute("class", "ibanelement");
         this._ibanElement.addEventListener("change", this._ibanChanged);
 
-        this._ibanImageElement = document.createElement("img");
-        this._ibanImageElement.setAttribute("src", "WebResources/cc_IbanValidator.IbanValidator/valid.png");
+        this._ibanImageElement = <HTMLImageElement>document.createElement("img");
         this._ibanImageElement.setAttribute("height", "20");
         this._ibanImageElement.setAttribute("width", "16");
         this._ibanImageElement.setAttribute("class", "ibanhidden");
+		
+		this.findImage(this._ibanImageElement, "valid.png");
 
         this._container.appendChild(this._ibanElement);
         this._container.appendChild(this._ibanImageElement);
@@ -94,35 +95,63 @@ export class IbanValidator implements ComponentFramework.StandardControl<IInputs
         this._ibanElement.removeEventListener("change", this._ibanChanged);
     }
 
-    public ibanChanged(evt: Event): void {
+    private ibanChanged(evt: Event): void {
         var iban = this._ibanElement.value;
         if (iban != null && iban.length > 0) {
             if (IBAN.isValid(iban)) {
-                this._ibanImageElement.setAttribute("src", "WebResources/cc_IbanValidator.IbanValidator/valid.png");
                 this._ibanImageElement.setAttribute("title", "This is a valid IBAN.");
                 this._ibanImageElement.removeAttribute("class");
+				
+				this.findImage(this._ibanImageElement, "valid.png");
+				
 				// @ts-ignore 
 				Xrm.Page.ui.clearFormNotification("IbanValidator");
             }
             else {
-                this._ibanImageElement.setAttribute("src", "WebResources/cc_IbanValidator.IbanValidator/invalid.png");
                 this._ibanImageElement.setAttribute("title", "this is a invalid IBAN.");
                 this._ibanImageElement.removeAttribute("class");
+				
+				this.findImage(this._ibanImageElement, "invalid.png");
+				
 				// @ts-ignore 
 				Xrm.Page.ui.setFormNotification("Iban is invalid.", "2", "IbanValidator");
+
             }
             
 			this._iban = iban;
 
         }
         else {
-            this._ibanImageElement.setAttribute("src","WebResources/cc_IbanValidator.IbanValidator/valid.png");
             this._ibanImageElement.setAttribute("class", "ibanhidden");
             this._ibanImageElement.removeAttribute("title");
             this._iban = "";
+			
+			this.findImage(this._ibanImageElement, "valid.png");
 			// @ts-ignore 
 			Xrm.Page.ui.clearFormNotification("IbanValidator");
         }
         this._notifyOutputChanged();
     }
+	
+	private findImage(img: HTMLImageElement, imageName: string) {
+		//find the image
+		this._context.resources.getResource(imageName,
+		content => {
+			this.setImage(img, "png", content);
+		},
+		() => {
+			this.showError();
+		});
+	}
+
+	private setImage(element: HTMLImageElement, fileType: string, fileContent: string): void {
+		//set the image to the img element
+		fileType = fileType.toLowerCase();
+		let imageUrl: string = `data:image/${fileType};base64, ${fileContent}`;
+		element.src = imageUrl;
+	}
+
+	private showError(): void {
+		console.log('error while downloading .png');
+	}
 }

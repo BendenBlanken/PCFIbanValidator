@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="IbanValidator" constructor="IbanValidator" version="0.0.11" display-name-key="IbanValidator_Display_Key" description-key="IbanValidator_Desc_Key" control-type="standard">
+  <control namespace="IbanValidator" constructor="IbanValidator" version="0.0.12" display-name-key="IbanValidator_Display_Key" description-key="IbanValidator_Desc_Key" control-type="standard">
     <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
     <property name="Iban" display-name-key="ibanValue_Display_Key" description-key="ibanValue_Desc_Key" of-type="SingleLine.Text" usage="bound" required="true" />
     <resources>
